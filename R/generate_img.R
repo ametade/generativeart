@@ -19,7 +19,7 @@
 #' generate_img(formula = my_formula, nr_of_img = 3, polar = FALSE, color = "#101820", background_color = "#F2AA4C")
 #' @importFrom purrr map
 
-generate_img <- function(formula, nr_of_img, polar = FALSE, filetype = "png", ...) {
+generate_img <- function(formula, nr_of_img, polar = FALSE, filetype = "png", dpi=75, ...) {
   seeds <- generate_seeds(nr_of_img)
   purrr::map(seeds, function(seed){
     set.seed(seed)
@@ -27,6 +27,6 @@ generate_img <- function(formula, nr_of_img, polar = FALSE, filetype = "png", ..
     logfile <- check_logfile_existence()
     logfile <- generate_logfile_entry(logfile, formula, seed, file_name)
     df <- generate_data(formula)
-    plot <- generate_plot(df, file_name, polar, filetype, ...)
+    plot <- generate_plot(df, file_name, polar, filetype, dpi, ...)
   })
 }
